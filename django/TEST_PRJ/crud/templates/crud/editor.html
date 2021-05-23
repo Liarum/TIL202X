@@ -1,0 +1,134 @@
+{% load static %}
+{% include 'crud/common/header.html' %}
+
+
+<script>var init = [];</script>
+	<div id="content-wrapper">
+
+<!-- 5. $SUMMERNOTE_WYSIWYG_EDITOR =================================================================
+
+		Summernote WYSIWYG-editor
+-->
+		<!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js)-->
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css">
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+
+		<!-- Javascript -->
+		<script>
+			init.push(function () {
+				if (! $('html').hasClass('ie8')) {
+					$('#summernote-example').summernote({
+						height: 200,
+						tabsize: 2,
+						codemirror: {
+							theme: 'monokai'
+						}
+					});
+				}
+				$('#summernote-boxed').switcher({
+					on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+					off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+				});
+				$('#summernote-boxed').on($('html').hasClass('ie8') ? "propertychange" : "change", function () {
+					var $panel = $(this).parents('.panel');
+					if ($(this).is(':checked')) {
+						$panel.find('.panel-body').addClass('no-padding');
+						$panel.find('.panel-body > *').addClass('no-border');
+					} else {
+						$panel.find('.panel-body').removeClass('no-padding');
+						$panel.find('.panel-body > *').removeClass('no-border');
+					}
+				});
+			});
+		</script>
+		<!-- / Javascript -->
+		<form method="POST" action="{% url 'crud:register' %}">
+			{% csrf_token %}
+			<div class="panel">
+				<div class="panel-heading">
+					{% comment %} <span class="panel-title"><a href="http://hackerwins.github.io/summernote/" target="_blank">Summernote WYSIWYG-editor <i class="fa fa-link"></i></a></span> {% endcomment %}
+
+					<div class="row form-group">
+						<label class="col-sm-1 control-label">Title:</label>
+						<div class="col-sm-11">
+							<input type="text" name="title" class="form-control">
+						</div>
+					</div>
+					{% comment %} <div class="panel-heading-controls">
+						<span class="panel-heading-text" style="font-size:11px;font-weight:600;">BOXED&nbsp;&nbsp;</span>
+						<input type="checkbox" data-class="switcher-sm" id="summernote-boxed">
+					</div> <!-- / .panel-heading-controls --> {% endcomment %}
+				</div>
+				<div class="panel-body">
+					<textarea name="content"  class="form-control" id="summernote-example" rows="10"></textarea>
+				</div>
+			</div>
+			<div style="display:flex; justify-content: flex-end; margin-bottom:15px">
+				<button type="submit" class="btn btn-primary">submit</button>
+			</div>
+		</form>
+<!-- /5. $SUMMERNOTE_WYSIWYG_EDITOR -->
+		<hr/>
+
+<!-- 6. $BOOTSTRAP_MARKDOWN ========================================================================
+
+		Bootstrap Markdown
+-->
+		<!-- Javascript -->
+		<script>
+			init.push(function () {
+				if (! $('html').hasClass('ie8')) {
+					$("#bs-markdown-example").markdown({ iconlibrary: 'fa' });
+				}
+
+				$('#markdown-boxed').switcher({
+					on_state_content: '<span class="fa fa-check" style="font-size:11px;"></span>',
+					off_state_content: '<span class="fa fa-times" style="font-size:11px;"></span>'
+				});
+				$('#markdown-boxed').on($('html').hasClass('ie8') ? "propertychange" : "change", function () {
+					var $panel = $(this).parents('.panel');
+					if ($(this).is(':checked')) {
+						$panel.find('.panel-body').addClass('no-padding');
+						$panel.find('.panel-body > *').addClass('no-border');
+					} else {
+						$panel.find('.panel-body').removeClass('no-padding');
+						$panel.find('.panel-body > *').removeClass('no-border');
+					}
+				});
+			});
+		</script>
+		<!-- / Javascript -->
+		<form method="POST" action="{% url 'crud:register' %}">
+			{% csrf_token %}
+			<div class="panel">
+				<div class="panel-heading">
+					{% comment %} <span class="panel-title"><a href="http://toopay.github.io/bootstrap-markdown/" target="_blank">Bootstrap Markdown <i class="fa fa-link"></i></a></span> {% endcomment %}
+					
+					<div class="row form-group">
+						<label class="col-sm-1 control-label">Title:</label>
+						<div class="col-sm-11">
+							<input type="text" name="title" class="form-control">
+						</div>
+					</div>
+					
+					{% comment %} <div class="panel-heading-controls">
+						<span class="panel-heading-text" style="font-size:11px;font-weight:600;">BOXED&nbsp;&nbsp;</span>
+						<input type="checkbox" data-class="switcher-sm" id="markdown-boxed">
+					</div> <!-- / .panel-heading-controls --> {% endcomment %}
+				</div>
+				<div class="panel-body">
+					<textarea name="content" id="bs-markdown-example" class="form-control" rows="10"></textarea>
+				</div>
+			</div>
+			
+			<div style="display:flex; justify-content: flex-end; margin-bottom:15px">
+				<button type="submit" class="btn btn-primary">submit</button>
+			</div>
+		</form>
+<!-- /6. $BOOTSTRAP_MARKDOWN -->
+
+{% include 'crud/common/footer.html' %}
