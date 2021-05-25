@@ -1,0 +1,200 @@
+header[role="banner"] #logo-main {
+    display: block;
+    margin: 20px auto;
+}
+
+#navbar-primary.navbar-default {
+    background: transparent;
+    border: none;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#navbar-primary.navbar-default .navbar-nav {
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-collapse > ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+#navbar-primary.navbar-default .navbar-nav > li {
+    display: inline-block;
+    float: none;
+	width: 100px;
+}
+
+
+
+.footer {
+    background-color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+ul.social-network {
+    list-style: none;
+    display: inline;
+    margin: auto;
+}
+
+.social-network > li {
+	display: inline;
+	margin: 0 10px;
+}
+
+/* footer social icons */
+.footer {
+	margin: 0;
+	padding: 0;
+}
+.social-network{
+	a.icoEmail:hover {
+		background-color: #3B5998;
+	}
+    a.icoBlog:hover {
+		background-color: #3B5998;
+	}
+	a.icoGithub:hover {
+		background-color: #33ccff;
+	}
+	a.icoMedium:hover {
+		background-color: #00AB6C;
+	}
+	a.icoQuora:hover {
+		background-color: #AA2200;
+	}
+	a.icoLinkedin:hover {
+		background-color: #007bb7;
+	}
+	a.icoInstagram:hover {
+		background: #f09433;
+		background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+	}
+}
+
+.social-network a.icoEmail:hover i, .social-network a.icoGithub:hover i, .social-network a.icoBlog:hover i, .social-network a.icoLinkedin:hover i {
+    color: #fff;
+}
+
+.social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+}
+
+.social-circle li i {
+    margin: 0;
+    line-height: 60px;
+    text-align: center;
+}
+
+.social-circle li a:hover i, .triggeredHover {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms--transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.social-circle i {
+    color: #fff;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    transition: all 0.8s;
+}
+
+.social-circle a {
+    background-color: #CCD8EA;
+}
+
+@media screen and (max-width: 500px) {
+    ul.social-network li {
+        display: inline;
+        margin: 0 5px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    ul.social-network li {
+        display: inline;
+        margin: 0 5px;
+    }
+    .social-circle li a {
+        display: inline-block;
+        position: relative;
+        margin: 0 auto 0 auto;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        text-align: center;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .social-circle li i {
+        margin: 0;
+        line-height: 40px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    ul.social-network li {
+        display: inline;
+        margin: 0 2px;
+    }
+    .social-circle li a {
+        display: inline-block;
+        position: relative;
+        margin: 0 auto 0 auto;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        text-align: center;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .social-circle li i {
+        margin: 0;
+        line-height: 40px;
+        text-align: center;
+    }
+}
+
