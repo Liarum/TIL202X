@@ -1,0 +1,16 @@
+version: '3'
+services:
+  sanic-worker:
+    image: amazonlinux:2018.03
+    command: tail -f /dev/null
+    container_name: sanic-worker
+    build: .
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - '../../migration_test/:/sanic'
+    environment:
+      - APP_ENV=local
+    ports:
+      - "9090:9090"
+      - "9999:9999"
