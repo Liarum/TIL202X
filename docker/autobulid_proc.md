@@ -92,9 +92,9 @@
   * 예시
 
   ```
-FROM microsoft/nanoserver
-COPY testfile.txt c:\
-RUN dir c:\
+  FROM microsoft/nanoserver
+  COPY testfile.txt c:\
+  RUN dir c:\
   ```
 ### 도커 컨테이너 빌드
 
