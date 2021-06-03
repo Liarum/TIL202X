@@ -54,47 +54,48 @@
 
   ```yaml
   version: "3.9"
-
-services:
-  proxy:
-    build: ./proxy
-    networks:
-      - frontend
-  app:
-    build: ./app
-    networks:
-      - frontend
-      - backend
-  db:
-    image: postgres
-    networks:
-      - backend
-
-networks:
-  frontend:
-    # Use a custom driver
-    driver: custom-driver-1
-  backend:
-    # Use a custom driver which takes special options
-    driver: custom-driver-2
-    driver_opts:
-    foo: "1"
-    bar: "2"
+  services:
+    proxy:
+      build: ./proxy
+      networks:
+  
+     - frontend
+       app:
+           build: ./app
+           networks:
+          - frontend
+            backend
+              db:
+                image: postgres
+                networks:
+               - backend
+  
+  networks:
+    frontend:
+      # Use a custom driver
+      driver: custom-driver-1
+    backend:
+      # Use a custom driver which takes special options
+      driver: custom-driver-2
+      driver_opts:
+      foo: "1"
+      bar: "2"
+  
+  
   ```
-
-  * networks
-    * mode : bridge(default), host, null
-
+  
+    * networks
+      * mode : bridge(default), host, null
+  
 * Dockerfile
 
   * 예시
 
   ```
-  FROM microsoft/nanoserver
-  COPY testfile.txt c:\
-  RUN dir c:\
+FROM microsoft/nanoserver
+COPY testfile.txt c:\
+RUN dir c:\
   ```
-
 ### 도커 컨테이너 빌드
 
 * docker-compose.yml 있는 경로로 이동 -> 명령어 실행
@@ -102,7 +103,6 @@ networks:
   ```sh
   docker-compose up -d --build
   ```
-
 
 
 
