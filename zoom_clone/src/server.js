@@ -21,12 +21,16 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", socket => {
-    socket.on("enter_room", (msg, done) => {
-        console.log(msg);
-        setTimeout(() => {
-            done();
-        }, 10000);
 
+    socket.onAny((event) => {
+        console.log(`Socket event: ${event}`);
+    });
+
+    
+    socket.on("enter_room", (roomName, showRoom) => {    
+        socket.join(roomName); // join the room
+        showRoom(); // executed at client side
+        socket.to(roomName).emit("welcome"); // send to all except sender
     });
     
     // console.log(socket);
