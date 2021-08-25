@@ -21,7 +21,7 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", socket => {
-
+    socket["nickname"] = "Anonymous";
     socket.onAny((event) => {
         console.log(`Socket event: ${event}`);
     });
@@ -30,8 +30,21 @@ wsServer.on("connection", socket => {
     socket.on("enter_room", (roomName, showRoom) => {    
         socket.join(roomName); // join the room
         showRoom(); // executed at client side
-        socket.to(roomName).emit("welcome"); // send to all except sender
+        socket.to(roomName).emit("welcome", socket.nickname); // send to all except sender
     });
+
+    socket.on("disconnecting", () => {
+        socket.rooms.forEach(room => socket.to(room).emit("bye", socket.nickname));
+    });
+
+    socket.on("new_message", (msg, room, done) => {
+        socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
+        done();
+    });
+
+    socket.on("nickname", (nickname) => {
+        socket["nickname"] = nickname;
+    })
     
     // console.log(socket);
 })
