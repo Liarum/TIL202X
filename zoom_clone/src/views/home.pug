@@ -10,12 +10,20 @@ html(lang="en")
         header
             h1 Noom!
         main
-            form#nickname
-                input(type="text", placeholder="choose a nickname", required)
-                button Save
+            div#welcome
+                form
+                    input(type="text", placeholder="room name", required)
+                    button Enter Room
 
-            ul
-            form#message
-                input(type="text", placeholder="write a msg", required)
-                button Send
+            div#room
+                h3
+                ul 
+                form#name
+                    input(type="text", placeholder="nickname", required)
+                    button Save
+                form#msg
+                    input(type="text", placeholder="message", required)
+                    button Send
+        
+        script(src="/socket.io/socket.io.js")
         script(src="public/js/app.js")

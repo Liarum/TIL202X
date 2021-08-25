@@ -1,6 +1,11 @@
 import http from "http";
-import WebSocket from "ws";
+
+// import WebSocket from "ws";
+import SocketIO from "socket.io"
+
+
 import express from "express";
+
 
 const app = express();
 
@@ -12,9 +17,42 @@ app.get("/*", (req, res) => res.redirect("/"));
 
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
 
+const httpServer = http.createServer(app);
+const wsServer = SocketIO(httpServer);
+
+wsServer.on("connection", socket => {
+    socket["nickname"] = "Anonymous";
+    socket.onAny((event) => {
+        console.log(`Socket event: ${event}`);
+    });
+
+    
+    socket.on("enter_room", (roomName, showRoom) => {    
+        socket.join(roomName); // join the room
+        showRoom(); // executed at client side
+        socket.to(roomName).emit("welcome", socket.nickname); // send to all except sender
+    });
+
+    socket.on("disconnecting", () => {
+        socket.rooms.forEach(room => socket.to(room).emit("bye", socket.nickname));
+    });
+
+    socket.on("new_message", (msg, room, done) => {
+        socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
+        done();
+    });
+
+    socket.on("nickname", (nickname) => {
+        socket["nickname"] = nickname;
+    })
+    
+    // console.log(socket);
+})
+
+
+/*
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-
 const sockets = [];
 
 wss.on("connection", (socket) => {
@@ -38,13 +76,14 @@ wss.on("connection", (socket) => {
             case "nickname":
                 socket["nickname"] = message.payload;
         };
-
-
         // socket.send(msg.toString());
         // console.log(msg.toString());
     });
 });
+*/
 
-server.listen(3000, handleListen);
 
+
+
+httpServer.listen(3000, handleListen);
 // app.listen(3000, handleListen);
