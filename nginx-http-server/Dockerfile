@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # dependencies
 RUN apt-get update
-RUN apt-get install -y build-essential libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev wget
+RUN apt-get install -y build-essential libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev wget vim
 
 # nginx download
 RUN mkdir -p ~/src && cd ~/src \
