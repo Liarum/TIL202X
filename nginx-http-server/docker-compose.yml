@@ -1,0 +1,12 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  nginx-http-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: nginx-http-server
+    stdin_open: true
+    tty: true
+    image: ubuntu
+    ports:
+      - "33280:80" # forwarding to available port
