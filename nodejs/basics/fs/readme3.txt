@@ -1,0 +1,1 @@
+I am streaming data. A piece of stream data is called "chunk".
