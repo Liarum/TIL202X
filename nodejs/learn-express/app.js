@@ -6,10 +6,12 @@ const dotenv = require('dotenv'); // .env 파일을 읽어와서 process.env로 
 const path = require('path');
 const fs = require('fs');
 const { upload } = require('./multer');
+const nunjucks = require('nunjucks');
 
 dotenv.config();
 const indexRouter = require('./routes');
 const userRouter = require('./routes/user');
+
 const app = express();
 
 try {
@@ -21,6 +23,13 @@ try {
 
 // middleware - dotenv
 app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'html');
+
+// 첫 번째 인수로 views 경로를, 두 번째 인수로 옵션을 넣음.
+nunjucks.configure('views', {
+    express: app,
+    watch: true, // HTML 파일이 변경될 때 템플릿 엔진을 다시 렌더링
+});
 
 // middleware - morgan
 app.use(morgan('dev'));  // 요청,응답에 대한 정보를 콘솔에 기록하는 middleware
@@ -56,13 +65,24 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 
 app.use((req, res, next) => {
-    res.status(404).send('Not Found');
+    // res.status(404).send('Not Found');
+
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 404;
+    next(error);
 });
 
 // 에러처리 미들웨어는 첫번째 인수로 error를 넘겨주어야 함
 app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send(err.message);
+    // console.error(err);
+    // res.status(500).send(err.message);
+
+    res.locals.title = 'error';
+    res.locals.message = err.message;
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+    res.status(err.status || 500);
+    res.render('error')
+
 });
 
 app.listen(app.get('port'), () => {
