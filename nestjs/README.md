@@ -6,7 +6,15 @@
 npm i -g @nestjs/cli
 ```
 
-### 프로젝트 초기화
+### 프로젝트 생성
 ```shell
 nest new {project-name}
+```
+
+### 컨트롤러 생성
+```shell
+nest g controller Users
+
+# 리소스의 CRUD 보일러플레이트 코드를 한번에 생성하는 명령
+nest g resource {resource-name}
 ```
